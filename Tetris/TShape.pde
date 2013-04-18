@@ -1,5 +1,5 @@
 class TShape extends Shape{
-  final block = "tetrisred.jpg";
+  final String block = "tetrisred.jpg";
   Ground ground;
   double bsize;
   
