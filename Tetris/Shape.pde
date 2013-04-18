@@ -1,3 +1,4 @@
+
 abstract class Shape{
   Block[] blocks = new Block[4];
   double x;
@@ -49,6 +50,14 @@ abstract class Shape{
   }
   
   boolean touchingRightWall(){
+    for(Block block: blocks){
+      if(block.touchingRightWall())
+        return true;
+    }
+    return false;
+  }
+  
+  boolean inRightWall(){
     for(Block block: blocks){
       if(block.touchingRightWall())
         return true;
@@ -113,17 +122,18 @@ abstract class Shape{
   }
   
   void adjustFromWalls(boolean clockwise){
+    try{
     while(inLeftWall()){
       for(Block block: getBlocks()){
         block.adjustXY(block.getX() + bsize,block.getY());
       }
     }
-    while(touchingRightWall()){
+    while(inRightWall()){
       for(Block block: getBlocks()){
         block.adjustXY(block.getX() - bsize,block.getY());
       }
     }
-    if(inLeftWall()){
+    } catch(ArrayIndexOutOfBoundsException exc){
       if(clockwise)
         rotateCounterClockwise();
       else

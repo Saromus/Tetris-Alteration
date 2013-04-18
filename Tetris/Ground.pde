@@ -33,6 +33,17 @@ class Ground{
     return false;
   }
   
+  boolean inRightWall(double xpos,double ypos){
+    int x = (int)(xpos / blockSize);
+    int y = (int)(ypos / blockSize);
+    if(y < 0 && x <= grid[0][grid[0].length - 1].getX())
+      return false;
+    if(x >= grid[y].length || grid[y][x] != null){
+      return true;
+    }
+    return false;
+  }
+  
   boolean touchingLeftWall(double xpos,double ypos){
     int x = (int)(xpos / blockSize) - 1;
     int y = (int)(ypos / blockSize);
@@ -47,7 +58,7 @@ class Ground{
   boolean inLeftWall(double xpos,double ypos){
     int x = (int)(xpos / blockSize);
     int y = (int)(ypos / blockSize);
-    if(y < 0 && x >= 0)
+    if(y < 0 || x >= 0)
       return false;
     if(x < 0 || grid[y][x] != null){
       return true;

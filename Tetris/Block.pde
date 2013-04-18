@@ -47,6 +47,10 @@ class Block{
     return ground.touchingRightWall(x,y);
   }
   
+  boolean inRightWall(){
+    return ground.inRightWall(x,y);
+  }
+  
   double getX(){
     return x;
   }

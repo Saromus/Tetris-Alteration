@@ -1,6 +1,6 @@
 class LineShape extends Shape{
   final String block = "tetrisblue.jpg";
-  final String block2 = "tetrispink.jpg";
+  final String block2 = "tetrisblue.jpg";
   Ground ground;
   double bsize;
   int position = 1;
