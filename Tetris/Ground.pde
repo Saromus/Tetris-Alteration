@@ -113,7 +113,10 @@ class Ground{
       }
       if(full){
         for(int x = 0; x < grid[y].length; x ++)
-          grid[y][x] = null;
+          //empties the line
+          if ((checkPowers(y,x)).equals("")){
+            grid[y][x] = null;
+          }
         for(int y2 = y; y2 > 0; y2 --){
           for(int x2 = 0; x2 < grid[y2].length; x2 ++){
             if(grid[y2][x2] != null)
@@ -124,4 +127,23 @@ class Ground{
       }
     }
   }
+  
+  //checking if the block at grid[a][b] is a powerup
+  String checkPowers(int a, int b){
+    if (grid[a][b].checkBomb()){
+      return "derp";
+    }
+    if (grid[a][b].checkGBomb()){
+      return "derpy";
+    }
+    if (grid[a][b].checkx2()){
+      return "derptwo";
+    }
+    if (grid[a][b].checkx4()){
+      return "derpfour";
+    }
+    if (grid[a][b].checkPika()){
+      return "derpikachu";
+    }
+    return "";
 }
