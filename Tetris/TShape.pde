@@ -1,4 +1,4 @@
-class TShape extends Shape{
+/*class TShape extends Shape{
   final String block = "tetrisred.jpg";
   Ground ground;
   double bsize;
@@ -25,4 +25,4 @@ class TShape extends Shape{
     blocks[3] = new Block(block,x,y + blockSize,blockSize,ground);
     setBlocks(blocks);
   }
-}
+}*/

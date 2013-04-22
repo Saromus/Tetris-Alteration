@@ -102,6 +102,7 @@ class Ground{
   }
   
   void checkForLines(){
+    // Checks to see if there are lines.
     for(int y = 0; y < grid.length - 1; y ++){
       boolean full = true;
       for(int x = 0; x < grid[y].length - 1; x ++){
@@ -117,6 +118,9 @@ class Ground{
           if ((checkPowers(y,x)).equals("")){
             grid[y][x] = null;
           }
+          // Update player score
+          
+          // Moves lines down.
         for(int y2 = y; y2 > 0; y2 --){
           for(int x2 = 0; x2 < grid[y2].length; x2 ++){
             if(grid[y2][x2] != null)
@@ -127,7 +131,7 @@ class Ground{
       }
     }
   }
-  
+    
   //checking if the block at grid[a][b] is a powerup
   String checkPowers(int a, int b){
     if (grid[a][b].checkBomb()){
@@ -140,10 +144,12 @@ class Ground{
       return "derptwo";
     }
     if (grid[a][b].checkx4()){
+      
       return "derpfour";
     }
     if (grid[a][b].checkPika()){
       return "derpikachu";
     }
     return "";
+  }
 }
