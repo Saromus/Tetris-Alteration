@@ -4,7 +4,7 @@ class SquareShape extends Shape{
   double bsize;
 
   SquareShape(double w,double r,Ground g){
-    super(w,r,-(w / r),g);
+    super(w,r,w / 2,-(w / r),g);
   }
   
   void rotateClockwise(){
@@ -22,17 +22,7 @@ class SquareShape extends Shape{
   }
   
   void rotateCounterClockwise(){
-    Block[] blocks = getBlocks();
-    blocks[0].adjustXY(getX() - bsize,getY());
-    blocks[1].adjustXY(getX() - bsize,getY() - bsize);
-    blocks[2].adjustXY(getX(),getY());
-    blocks[3].adjustXY(getX(),getY() - bsize);
-    Block temp = makeCopy(blocks[0]);
-    blocks[0] = makeCopy(blocks[1]);
-    blocks[1] = makeCopy(blocks[3]);
-    blocks[3] = makeCopy(blocks[2]);
-    blocks[2] = makeCopy(temp);
-    setBlocks(blocks);
+    rotateClockwise();
   }
   
   void createShape(double blockSize, double x, double y){

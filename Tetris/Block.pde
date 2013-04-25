@@ -71,44 +71,4 @@ class Block{
   double getSize(){
     return blockSize;
   }
-  
-  boolean checkBomb(){
-    String name = getType();
-    if (name.charAt(name.length()-5)==('b')){
-      return true;
-    }
-    return false;
-  }
-  
-  boolean checkGBomb(){
-    String name = getType();
-    if (name.charAt(name.length()-5)==('g')){
-      return true;
-    }
-    return false;
-  }
-  
-  boolean checkx2(){
-    String name = getType();
-    if (name.charAt(name.length()-5)==('2')){
-      return true;
-    }
-    return false;
-  }
-  
-  boolean checkx4(){
-    String name = getType();
-    if (name.charAt(name.length()-5)==('4')){
-      return true;
-    }
-    return false;
-  }
-  
-  boolean checkPika(){
-    String name = getType();
-    if (name.charAt(name.length()-5)==('p')){
-      return true;
-    }
-    return false;
-  }
 }

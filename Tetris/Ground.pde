@@ -1,24 +1,22 @@
 class Ground{
   Block[][] grid;
   double blockSize;
-  int playerScoreMultiplier = 1;
-  boolean hasMultiplier = false;
   
   Ground(double windowH, double windowW, double blockRatio){
     blockSize = windowW / blockRatio;
     grid = new Block[(int)(windowH / blockSize) + 1][(int)blockRatio + 1];
     for(int x = 0; x <= blockRatio; x ++){
-      grid[(int)(windowH / blockSize)][x] = new Block("tetrisyellow.jpg",x * blockSize,windowHeight,blockSize,this);
+      grid[(int)(windowH / blockSize)][x] = new Block("blank.png",x * blockSize,windowHeight,blockSize,this);
     }
     for(int x = 0; x <= (int)(windowH / blockSize); x ++){
-      grid[x][(int)blockRatio] = new Block("tetrisyellow.jpg",windowWidth,x * blockSize,blockSize,this);
+      grid[x][(int)blockRatio] = new Block("blank.png",windowWidth,x * blockSize,blockSize,this);
     }
   }
   
   boolean touchingGround(double xpos,double ypos){
     int x = (int)(xpos / blockSize);
     int y = (int)(ypos / blockSize) + 1;
-    if(y > grid.length || y < 0 || grid[y][x] != null){
+    if(x < 0 || x > grid.length || y > grid.length || y < 0 || grid[y][x] != null){
       return true;
     }
     return false;
@@ -40,7 +38,7 @@ class Ground{
     int y = (int)(ypos / blockSize);
     if(y < 0 && x <= grid[0][grid[0].length - 1].getX())
       return false;
-    if(x >= grid[y].length || grid[y][x] != null){
+    if(x < 0 || x >= grid[y].length || grid[y][x] != null){
       return true;
     }
     return false;
@@ -104,7 +102,6 @@ class Ground{
   }
   
   void checkForLines(){
-    // Checks to see if there are lines.
     for(int y = 0; y < grid.length - 1; y ++){
       boolean full = true;
       for(int x = 0; x < grid[y].length - 1; x ++){
@@ -116,16 +113,7 @@ class Ground{
       }
       if(full){
         for(int x = 0; x < grid[y].length; x ++)
-          //empties the line
-          if ((checkPowers(y,x)).equals("")){
-            grid[y][x] = null;
-          }
-          
-          // Update player score
-          // A single line clear gives the player +100 points.
-          Tetris.setPlayerScore(Tetris.getPlayerScore() + 100 * playerScoreMultiplier);
-          
-          // Moves lines down.
+          grid[y][x] = null;
         for(int y2 = y; y2 > 0; y2 --){
           for(int x2 = 0; x2 < grid[y2].length; x2 ++){
             if(grid[y2][x2] != null)
@@ -135,29 +123,5 @@ class Ground{
         }
       }
     }
-  }
-    
-  //checking if the block at grid[a][b] is a powerup
-  String checkPowers(int a, int b){
-    if (grid[a][b].checkBomb()){
-      return "derp";
-    }
-    if (grid[a][b].checkGBomb()){
-      return "derpy";
-    }
-    if (grid[a][b].checkx2()){
-     // playerScoreMultiplier = 2;
-      //hasMultiplier = true;
-      return "derptwo";
-    }
-    if (grid[a][b].checkx4()){
-      //playerScoreMultiplier = 4;
-     // hasMultiplier = true;
-      return "derpfour";
-    }
-    if (grid[a][b].checkPika()){
-      return "derpikachu";
-    }
-    return "";
   }
 }

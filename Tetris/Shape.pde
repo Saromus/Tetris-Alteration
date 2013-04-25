@@ -8,8 +8,8 @@ abstract class Shape{
   double bsize;
   Ground ground;
   
-  Shape(double wWidth,double bRatio,double ypos, Ground g){
-    x = wWidth / 2;
+  Shape(double wWidth,double bRatio,double xpos, double ypos, Ground g){
+    x = xpos;
     y = ypos;
     ground = g;
     double blockSize = wWidth / (double)bRatio;
@@ -58,7 +58,7 @@ abstract class Shape{
   
   boolean inRightWall(){
     for(Block block: blocks){
-      if(block.touchingRightWall())
+      if(block.inRightWall())
         return true;
     }
     return false;
@@ -120,28 +120,18 @@ abstract class Shape{
     speedDown = 0;
   }
   
-  void adjustFromWalls(boolean clockwise){
-    try{
-    while(inLeftWall()){
-      for(Block block: getBlocks()){
-        block.adjustXY(block.getX() + bsize,block.getY());
-      }
-    }
-    while(inRightWall()){
-      for(Block block: getBlocks()){
-        block.adjustXY(block.getX() - bsize,block.getY());
-      }
-    }
-    } catch(ArrayIndexOutOfBoundsException exc){
-      if(clockwise)
-        rotateCounterClockwise();
-      else
-        rotateClockwise();
-    }
-  }
-  
   Block makeCopy(Block block){
     return new Block(block.getType(),block.getX(),block.getY(),block.getSize(),ground);
+  }
+  
+  boolean invalidMovement(){
+    if(inRightWall())
+      return true;
+    if(inLeftWall())
+      return true;
+    if(touchingGround())
+      return true;
+    return false;
   }
   
   abstract void rotateClockwise();
