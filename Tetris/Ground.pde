@@ -1,6 +1,8 @@
 class Ground{
   Block[][] grid;
   double blockSize;
+  int playerScoreMultiplier = 1;
+  boolean hasMultiplier = false;
   
   Ground(double windowH, double windowW, double blockRatio){
     blockSize = windowW / blockRatio;
@@ -118,7 +120,10 @@ class Ground{
           if ((checkPowers(y,x)).equals("")){
             grid[y][x] = null;
           }
+          
           // Update player score
+          // A single line clear gives the player +100 points.
+          Tetris.setPlayerScore(Tetris.getPlayerScore() + 100 * playerScoreMultiplier);
           
           // Moves lines down.
         for(int y2 = y; y2 > 0; y2 --){
@@ -141,10 +146,13 @@ class Ground{
       return "derpy";
     }
     if (grid[a][b].checkx2()){
+     // playerScoreMultiplier = 2;
+      //hasMultiplier = true;
       return "derptwo";
     }
     if (grid[a][b].checkx4()){
-      
+      //playerScoreMultiplier = 4;
+     // hasMultiplier = true;
       return "derpfour";
     }
     if (grid[a][b].checkPika()){

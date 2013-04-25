@@ -5,7 +5,7 @@ double windowWidth = 500;
 double windowHeight = 750;
 double blockRatio = 10;
 double blockSize = windowWidth / blockRatio;
-int playerScore = 0;
+static int playerScore = 0;
 boolean onlyOnce;
 boolean playing = true;
 
@@ -17,7 +17,6 @@ void setup() {
   onlyOnce = true;
   PFont f = createFont("Arial", 16, true);
   textFont(f);
-  textAlign(RIGHT);
 }
 
 void draw() {
@@ -90,16 +89,20 @@ void keyReleased() {
 }
 
 void showScoreboard() {
+  int xPos = 584;
   String scoreboard = "Player Score: " + getPlayerScore();
-  fill(0);
+  fill(255);
   textSize(20);
-  text(scoreboard, 700, 250);
+  rect(xPos, 227, scoreboard.length() * 10, 30);
+  fill(0);
+  text(scoreboard, xPos + 6, 250);
+  
 }
 
-void setPlayerScore(int score) {
+static void setPlayerScore(int score) {
   playerScore = score;
 }
 
-int getPlayerScore() {
+static int getPlayerScore() {
   return playerScore;
 }

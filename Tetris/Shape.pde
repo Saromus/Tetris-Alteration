@@ -1,4 +1,3 @@
-
 abstract class Shape{
   Block[] blocks = new Block[4];
   double x;
