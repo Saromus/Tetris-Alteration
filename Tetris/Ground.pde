@@ -1,24 +1,24 @@
 class Ground{
   Block[][] grid;
   double blockSize;
-  int playerScoreMultiplier = 1;
+  int playerScoreMultiplier = 0;
   boolean hasMultiplier = false;
   
   Ground(double windowH, double windowW, double blockRatio){
     blockSize = windowW / blockRatio;
     grid = new Block[(int)(windowH / blockSize) + 1][(int)blockRatio + 1];
     for(int x = 0; x <= blockRatio; x ++){
-      grid[(int)(windowH / blockSize)][x] = new Block("tetrisyellow.jpg",x * blockSize,windowHeight,blockSize,this);
+      grid[(int)(windowH / blockSize)][x] = new Block("blank.png",x * blockSize,windowHeight,blockSize,this); 
     }
     for(int x = 0; x <= (int)(windowH / blockSize); x ++){
-      grid[x][(int)blockRatio] = new Block("tetrisyellow.jpg",windowWidth,x * blockSize,blockSize,this);
+      grid[x][(int)blockRatio] = new Block("blank.png",windowWidth,x * blockSize,blockSize,this); 
     }
   }
   
   boolean touchingGround(double xpos,double ypos){
     int x = (int)(xpos / blockSize);
     int y = (int)(ypos / blockSize) + 1;
-    if(y > grid.length || y < 0 || grid[y][x] != null){
+    if(x < 0 || x > grid.length || y > grid.length || y < 0 || grid[y][x] != null){ 
       return true;
     }
     return false;
@@ -29,7 +29,7 @@ class Ground{
     int y = (int)(ypos / blockSize);
     if(y < 0 && x <= grid[0][grid[0].length - 1].getX())
       return false;
-    if(x >= grid[y].length || grid[y][x] != null){
+    if(x >= grid[y].length || grid[y][x] != null){ 
       return true;
     }
     return false;
@@ -40,7 +40,7 @@ class Ground{
     int y = (int)(ypos / blockSize);
     if(y < 0 && x <= grid[0][grid[0].length - 1].getX())
       return false;
-    if(x >= grid[y].length || grid[y][x] != null){
+    if(x < 0 || x >= grid[y].length || grid[y][x] != null){
       return true;
     }
     return false;
@@ -120,10 +120,23 @@ class Ground{
           if ((checkPowers(y,x)).equals("")){
             grid[y][x] = null;
           }
+          else if ((checkPowers(y, x)).equals("two")) {
+            println("x: " + y + " y: " + x);  // Debug Output
+            setScoreMultiplier(2);
+            grid[y][x] = null;
+          }
+          else if ((checkPowers(y, x)).equals("four")) {
+            println("x: " + y + " y: " + x);
+            setScoreMultiplier(4);
+            grid[y][x] = null;
+          }
           
-          // Update player score
+          // Update player score, taking the score multiplier into consideration.
           // A single line clear gives the player +100 points.
-          Tetris.setPlayerScore(Tetris.getPlayerScore() + 100 * playerScoreMultiplier);
+          if (getScoreMultiplier() > 1)
+            Tetris.accumulatePlayerScore(100 * getScoreMultiplier());
+          else
+            Tetris.accumulatePlayerScore(100);
           
           // Moves lines down.
         for(int y2 = y; y2 > 0; y2 --){
@@ -140,24 +153,29 @@ class Ground{
   //checking if the block at grid[a][b] is a powerup
   String checkPowers(int a, int b){
     if (grid[a][b].checkBomb()){
-      return "derp";
+      return "bomb";
     }
     if (grid[a][b].checkGBomb()){
-      return "derpy";
+      return "gravity";
     }
     if (grid[a][b].checkx2()){
-     // playerScoreMultiplier = 2;
-      //hasMultiplier = true;
-      return "derptwo";
+      return "two";
     }
     if (grid[a][b].checkx4()){
-      //playerScoreMultiplier = 4;
-     // hasMultiplier = true;
-      return "derpfour";
+      return "four";
     }
     if (grid[a][b].checkPika()){
-      return "derpikachu";
+      return "pikachu";
     }
     return "";
   }
+
+  void setScoreMultiplier(int multiplier) {
+    playerScoreMultiplier += multiplier;
+  }
+   
+  int getScoreMultiplier() {
+    return playerScoreMultiplier;
+  }
+  
 }
