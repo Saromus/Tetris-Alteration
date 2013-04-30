@@ -1,19 +1,14 @@
-class LineShape extends Shape {
-  final String block1 = "tetrisblue.jpg";
-  final String block2 = "tetrisblueb.jpg";
-  final String block3 = "tetrisblueg.jpg";
-  final String block4 = "tetrisbluep.png";
-  final String block5 = "tetrisbluex2.png";
-  final String block6 = "tetrisbluex4.png";
-  
+class LineShape extends Shape{
+  ArrayList <String> blocks;
+  String[] block;
   Ground ground;
   double bsize;
   int position = 1;
-
-  LineShape(double w, double r, Ground g) {
-    super(w,r,w / 2,(w / r),g); 
+  
+  LineShape(double w,double r,Ground g){
+    super(w,r,w / 2,(w / r),g);
   }
-
+  
   void rotateClockwise(){
       Block[] blocks = getBlocks();
       if(position == 1){
@@ -49,51 +44,47 @@ class LineShape extends Shape {
       position += 4;
       rotateClockwise();
   }
-
-  void createShape(double blockSize, double x, double y) {
+  
+  void createShape(double blockSize, double x, double y){
     Ground ground = getGround();
     bsize = blockSize;
     Block[] blocks = new Block[4];
-    blocks[0] = new Block(chooseBlock(), x, y - (blockSize * 2), blockSize, ground);
-    blocks[1] = new Block(chooseBlock(), x, y - blockSize, blockSize, ground);
-    blocks[2] = new Block(chooseBlock(), x, y, blockSize, ground);
-    blocks[3] = new Block(chooseBlock(), x, y + blockSize, blockSize, ground);
+    blocks[0] = new Block(block[0],x,y - (blockSize * 2),blockSize,ground);
+    blocks[1] = new Block(block[1],x,y - blockSize,blockSize,ground);
+    blocks[2] = new Block(block[2],x,y,blockSize,ground);
+    blocks[3] = new Block(block[3],x,y + blockSize,blockSize,ground);
     setBlocks(blocks);
   }
-
-  String chooseBlock() {
-    int choose = (int)random(200);
-    String chosenblock="";
-    if ((choose>10)&&(choose<15)) {
-      chosenblock=block2;
-    }else
-    if ((choose>50)&&(choose<55)) {
-      chosenblock=block3;
-    }else
-    if ((choose>80)&&(choose<85)) {
-      chosenblock=block4;
-    }else
-    if ((choose>110)&&(choose<115)) {
-      chosenblock=block5;
-    }else
-    if ((choose>148)&&(choose<152)) {
-      chosenblock=block6;
-    /*int choose = (int)random(60);
-    String chosenblock="";
-    if ((choose>=10)&&(choose<20)) {
-      chosenblock=block2;
-    } else if ((choose>=20)&&(choose<30)) {
-      chosenblock=block3;
-    } else if ((choose>=30)&&(choose<40)) {
-      chosenblock=block4;
-    } else if ((choose>=40)&&(choose<50)) {
-      chosenblock=block5;
-    } else if ((choose>=50)&&(choose<=60)) {
-      chosenblock=block6;*/
-    } else {
-      chosenblock=block1;
+  
+  void makeBlocks(){
+    blocks = new ArrayList <String>();
+    block = new String[4];
+    blocks.add("tetrisblue.jpg");
+    blocks.add("tetrisblueb.jpg");
+    blocks.add("tetrisblueg.jpg");
+    blocks.add("tetrisbluep.png");
+    blocks.add("tetrisbluex2.png");
+    blocks.add("tetrisbluex4.png");
+    int count = 0;
+    while(count < 4){
+      int choose = (int)random(200);
+      int chosenblock = 0;
+      if ((choose > 10) && (choose < 15)) {
+        chosenblock = 1;
+      }else
+      if ((choose > 50) && (choose < 55)) {
+        chosenblock = 2;
+      }else
+      if ((choose > 80) && (choose < 85)) {
+        chosenblock = 3;
+      }else
+      if ((choose > 110) && (choose < 115)) {
+        chosenblock = 4;
+      }else
+      if ((choose > 148) && (choose < 152)) {
+        chosenblock = 5;
+      }
+      block[count ++] = blocks.get(chosenblock);
     }
-    return chosenblock;
   }
 }
-

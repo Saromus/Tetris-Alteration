@@ -1,5 +1,6 @@
 class RightLShape extends Shape{
-  final String block = "tetrisgreen.jpg";
+  ArrayList <String> blocks;
+  String[] block;
   Ground ground;
   double bsize;
   int position = 1;
@@ -45,10 +46,42 @@ class RightLShape extends Shape{
     Ground ground = getGround();
     bsize = blockSize;
     Block[] blocks = new Block[4];
-    blocks[0] = new Block(block,x + (bsize / 2),y - (bsize / 2),blockSize,ground);
-    blocks[1] = new Block(block,x - (bsize / 2),y - (bsize / 2),blockSize,ground);
-    blocks[2] = new Block(block,x - (bsize / 2) - bsize,y - (bsize / 2),blockSize,ground);
-    blocks[3] = new Block(block,x+ (bsize / 2),y + (bsize / 2),blockSize,ground);
+    blocks[0] = new Block(block[0],x + (bsize / 2),y - (bsize / 2),blockSize,ground);
+    blocks[1] = new Block(block[1],x - (bsize / 2),y - (bsize / 2),blockSize,ground);
+    blocks[2] = new Block(block[2],x - (bsize / 2) - bsize,y - (bsize / 2),blockSize,ground);
+    blocks[3] = new Block(block[3],x+ (bsize / 2),y + (bsize / 2),blockSize,ground);
     setBlocks(blocks);
+  }
+  
+  void makeBlocks(){
+    blocks = new ArrayList <String>();
+    block = new String[4];
+    blocks.add("tetrisgreen.jpg");
+    blocks.add("tetrisgreenb.jpg");
+    blocks.add("tetrisgreeng.png");
+    blocks.add("tetrisgreenp.png");
+    blocks.add("tetrisgreenx2.png");
+    blocks.add("tetrisgreenx4.png");
+    int count = 0;
+    while(count < 4){
+      int choose = (int)random(200);
+      int chosenblock = 0;
+      if ((choose > 10) && (choose < 15)) {
+        chosenblock = 1;
+      }else
+      if ((choose > 50) && (choose < 55)) {
+        chosenblock = 2;
+      }else
+      if ((choose > 80) && (choose < 85)) {
+        chosenblock = 3;
+      }else
+      if ((choose > 110) && (choose < 115)) {
+        chosenblock = 4;
+      }else
+      if ((choose > 148) && (choose < 152)) {
+        chosenblock = 5;
+      }
+      block[count ++] = blocks.get(chosenblock);
+    }
   }
 }

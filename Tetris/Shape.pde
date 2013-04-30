@@ -137,4 +137,5 @@ abstract class Shape{
   abstract void rotateClockwise();
   abstract void rotateCounterClockwise();
   abstract void createShape(double blockSize,double x, double y);
+  abstract void makeBlocks();
 }

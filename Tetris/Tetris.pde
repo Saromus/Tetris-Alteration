@@ -1,7 +1,7 @@
 
 Shape shape;
 Ground ground;
-int numShapes = 6;
+int numShapes = 7;
 int drawCounter = 0;
 double windowWidth = 500;
 double windowHeight = 750;
@@ -51,18 +51,20 @@ void draw() {
 
 void getNewShape() {
   int random = (int)(Math.random() * numShapes) + 1;
-  if (random == 1)
-    shape = new SquareShape(windowWidth, blockRatio, ground);
-  else if (random == 2)
-    shape = new LineShape(windowWidth, blockRatio, ground);
-  else if (random == 3)
-    shape = new TShape(windowWidth, blockRatio, ground);
-  else if (random == 4)
-    shape = new RightLShape(windowWidth, blockRatio, ground); 
-  else if (random == 5)
-    shape = new LeftLShape(windowWidth, blockRatio, ground); 
-  else if (random == 6)
-    shape = new LeftZShape(windowWidth, blockRatio, ground);
+  if(random == 1)
+    shape = new SquareShape(windowWidth,blockRatio,ground);
+  else if(random == 2)
+    shape = new LineShape(windowWidth,blockRatio,ground);
+  else if(random == 3)
+    shape = new TShape(windowWidth,blockRatio,ground);
+  else if(random == 4)
+    shape = new RightLShape(windowWidth,blockRatio,ground);
+  else if(random == 5)
+    shape = new LeftLShape(windowWidth,blockRatio,ground);
+  else if(random == 6)
+    shape = new LeftZShape(windowWidth,blockRatio,ground);
+  else if(random == 7)
+    shape = new RightZShape(windowWidth,blockRatio,ground);
 }
 
 void printGrid() {

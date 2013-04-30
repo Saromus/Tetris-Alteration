@@ -1,10 +1,11 @@
 class SquareShape extends Shape{
-  final String block = "tetrisyellow.jpg";
+  ArrayList <String> blocks;
+  String[] block;
   Ground ground;
   double bsize;
 
   SquareShape(double w,double r,Ground g){
-   super(w,r,w / 2,-(w / r),g);
+    super(w,r,w / 2,-(w / r),g);
   }
   
   void rotateClockwise(){
@@ -29,10 +30,42 @@ class SquareShape extends Shape{
     Ground ground = getGround();
     bsize = blockSize;
     Block[] blocks = new Block[4];
-    blocks[0] = new Block(block,x - blockSize,y - blockSize,blockSize,ground);
-    blocks[1] = new Block(block,x,y - blockSize,blockSize,ground);
-    blocks[2] = new Block(block,x - blockSize,y,blockSize,ground);
-    blocks[3] = new Block(block,x,y,blockSize,ground);
+    blocks[0] = new Block(block[0],x - blockSize,y - blockSize,blockSize,ground);
+    blocks[1] = new Block(block[1],x,y - blockSize,blockSize,ground);
+    blocks[2] = new Block(block[2],x - blockSize,y,blockSize,ground);
+    blocks[3] = new Block(block[3],x,y,blockSize,ground);
     setBlocks(blocks);
+  }
+  
+  void makeBlocks(){
+    blocks = new ArrayList <String>();
+    block = new String[4];
+    blocks.add("tetrisyellow.jpg");
+    blocks.add("tetrisyellowb.jpg");
+    blocks.add("tetrisyellowg.png");
+    blocks.add("tetrisyellowp.png");
+    blocks.add("tetrisyellowx2.png");
+    blocks.add("tetrisyellowx4.png");
+    int count = 0;
+    while(count < 4){
+      int choose = (int)random(200);
+      int chosenblock = 0;
+      if ((choose > 10) && (choose < 15)) {
+        chosenblock = 1;
+      }else
+      if ((choose > 50) && (choose < 55)) {
+        chosenblock = 2;
+      }else
+      if ((choose > 80) && (choose < 85)) {
+        chosenblock = 3;
+      }else
+      if ((choose > 110) && (choose < 115)) {
+        chosenblock = 4;
+      }else
+      if ((choose > 148) && (choose < 152)) {
+        chosenblock = 5;
+      }
+      block[count ++] = blocks.get(chosenblock);
+    }
   }
 }
