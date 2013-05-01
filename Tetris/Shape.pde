@@ -14,7 +14,7 @@ abstract class Shape{
     ground = g;
     double blockSize = wWidth / (double)bRatio;
     bsize = blockSize;
-    makeBlocks();de
+    makeBlocks();
     createShape(blockSize,x,y);
   }
   
