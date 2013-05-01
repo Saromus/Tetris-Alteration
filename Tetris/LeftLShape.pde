@@ -81,7 +81,7 @@ class LeftLShape extends Shape{
       if ((choose > 148) && (choose < 152)) {
         chosenblock = 5;
       }
-      block[count ++] = blocks.get(chosenblock);
+      block[count++] = blocks.get(chosenblock);
     }
   }
 }
